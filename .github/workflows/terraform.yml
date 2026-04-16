@@ -93,7 +93,7 @@ jobs:
         run: exit 1
 
       - name: Release state lock on failure
-        if: failure()
+        if: failure() || cancelled()
         run: |
           aws s3 rm s3://zen-pharma-terraform-state-ravdy/envs/dev/terraform.tfstate.tflock || true
 
@@ -150,7 +150,7 @@ jobs:
             tfplan
 
       - name: Release state lock on failure
-        if: failure()
+        if: failure() || cancelled()
         run: |
           aws s3 rm s3://zen-pharma-terraform-state-ravdy/envs/dev/terraform.tfstate.tflock || true
 
@@ -195,6 +195,6 @@ jobs:
             -no-color
 
       - name: Release state lock on failure
-        if: failure()
+        if: failure() || cancelled()
         run: |
           aws s3 rm s3://zen-pharma-terraform-state-ravdy/envs/dev/terraform.tfstate.tflock || true
